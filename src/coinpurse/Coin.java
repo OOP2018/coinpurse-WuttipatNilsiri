@@ -50,21 +50,34 @@ public class Coin implements Comparable<Coin>{
 	
 	/** test whatever this coin is equals object arg */
 	@Override
-	public boolean equals(Object arg){
-		Coin castedArg = null;
-		if(arg != null){
-			if(arg instanceof Coin){
-				castedArg = (Coin) arg;
-			}
-			else
-				return false;
-		}
-		else
-			 return false;
-		
-		return this.value == castedArg.value 
-				&& this.currency.equals(castedArg.currency);
+	public boolean equals(Object obj){
+		// (1) verify that obj is not null
+		if (obj == null) return false;
+		// (2) test that obj is the same class as "this" object
+		if ( obj.getClass() != this.getClass() )
+		return false;
+		// (3) cast obj to this class's type
+		Coin other = (Coin) obj;
+		// (4) compare whatever values determine "equal"
+		if ( this.getCurrency().equals(other.getCurrency()) && this.getValue() == other.getValue() )
+			return true;
+		return false; 
 	}
+//		Coin castedArg = null;
+//		if(arg != null){
+//			if(arg instanceof Coin){
+//				castedArg = (Coin) arg;
+//			}
+//			else 
+//				return false;
+//			
+//		}
+//		else
+//			 return false;
+//		
+//		return this.value == castedArg.value 
+//				&& this.currency.equals(castedArg.currency);
+//	}
 	
 	/** compare by value */
 	@Override
