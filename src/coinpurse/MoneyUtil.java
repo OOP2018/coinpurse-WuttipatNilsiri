@@ -17,12 +17,12 @@ public class MoneyUtil {
 	 * @param currency : String
 	 * @return new list that unmodifiable
 	 */
-	public static List<Coin> filterByCurrency(final List<Coin> coinlist, String currency) {
+	public static List<Valuable> filterByCurrency(final List<Valuable> coinlist, String currency) {
 		if (currency == null) {
 			throw new IllegalArgumentException("Currency cannot be null");
 		}
-		List<Coin> temp = new ArrayList<>();
-		for (Coin c : coinlist) {
+		List<Valuable> temp = new ArrayList<>();
+		for (Valuable c : coinlist) {
 			if (c.getCurrency().equalsIgnoreCase(currency)) {
 				temp.add(c);
 			}
@@ -35,18 +35,18 @@ public class MoneyUtil {
 	 * sortCoin in the list
 	 * @param coins 
 	 */
-	public static void sortCoin(List<Coin> coins) {
+	public static void sortByValue(List<Valuable> coins) {
 		coins.sort(new CompareByValue());
 	}
 	
 	public static void main(String[] args) {
 		String currency = "Baht";
 		System.out.println("Filter coins by currency of " + currency);
-		List<Coin> coins = makeInternationalCoins();
+		List<Valuable> coins = makeInternationalCoins();
 		int size = coins.size();
 		System.out.print(" INPUT: ");
 		printList(coins, " ");
-		List<Coin> rupees = filterByCurrency(coins, currency);
+		List<Valuable> rupees = filterByCurrency(coins, currency);
 		System.out.print("RESULT: ");
 		printList(rupees, " ");
 		if (coins.size() != size)
@@ -56,7 +56,7 @@ public class MoneyUtil {
 		coins = makeInternationalCoins();
 		System.out.print(" INPUT: ");
 		printList(coins, " ");
-		sortCoin(coins);
+		sortByValue(coins);
 		System.out.print("RESULT: ");
 		printList(coins, " ");
 
@@ -65,8 +65,8 @@ public class MoneyUtil {
 
 	}
 	/** for test */
-	public static List<Coin> makeInternationalCoins() {
-		List<Coin> money = new ArrayList<Coin>();
+	public static List<Valuable> makeInternationalCoins() {
+		List<Valuable> money = new ArrayList<Valuable>();
 		money.addAll(makeCoins("Baht", 0.25, 1.0, 2.0, 5.0, 10.0, 10.0));
 		money.addAll(makeCoins("Ringgit", 2.0, 50.0, 1.0, 5.0));
 		money.addAll(makeCoins("Rupee", 0.5, 0.5, 10.0, 1.0));

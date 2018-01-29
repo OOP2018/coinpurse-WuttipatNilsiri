@@ -4,7 +4,7 @@ package coinpurse;
  * @author wuttipat nilsiri
  *
  */
-public class Coin implements Comparable<Coin>{
+public class Coin implements Valuable{
 	
 	private double value;
 	private String currency;
@@ -14,7 +14,7 @@ public class Coin implements Comparable<Coin>{
 	 * @param value
 	 * @param currency
 	 */
-	public Coin(double value,String currency){
+	Coin(double value,String currency){
 		if (value > 0){
 			this.value = value;
 			this.currency = currency;
@@ -41,7 +41,7 @@ public class Coin implements Comparable<Coin>{
 	 */
 	public Coin(double value){
 		this.value = value;
-		currency = "bath";
+		currency = "Baht";
 	}
 	
 	public String toString(){
@@ -63,39 +63,21 @@ public class Coin implements Comparable<Coin>{
 			return true;
 		return false; 
 	}
-//		Coin castedArg = null;
-//		if(arg != null){
-//			if(arg instanceof Coin){
-//				castedArg = (Coin) arg;
-//			}
-//			else 
-//				return false;
-//			
-//		}
-//		else
-//			 return false;
-//		
-//		return this.value == castedArg.value 
-//				&& this.currency.equals(castedArg.currency);
-//	}
-	
-	/** compare by value */
+
 	@Override
-////	public int compareTo(Coin arg0) {
-//		return (int) ((this.value - arg0.getValue())*1000);
-//		
-//	}
-	public int compareTo(Coin coin){
-        if(this.value < coin.getValue()){
+	public int compareTo(Valuable o){
+        if(this.value < o.getValue()){
             return -1;
         }
-        else if(this.value > coin.getValue()){
+        else if(this.value > o.getValue()){
             return 1;
         }
         else{
             return 0;
         }
 	}
+
+	
 
 	
 }

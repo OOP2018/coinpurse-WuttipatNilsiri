@@ -13,7 +13,7 @@ import java.util.*;
 public class Purse {
     /** Collection of objects in the purse. */
 
-	List<Coin> money;
+	List<Valuable> money;
     /** Capacity is maximum number of items the purse can hold.
      *  Capacity is set when the purse is created and cannot be changed.
      */
@@ -25,7 +25,7 @@ public class Purse {
      */
     public Purse( int capacity ) {
     	this.capacity = capacity;
-    	money = new ArrayList<Coin>(this.capacity);
+    	money = new ArrayList<Valuable>(this.capacity);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Purse {
      */
     public double getBalance() {
 		double sum = 0;
-    	for(Coin coin : money){
+    	for(Valuable coin : money){
     		if(coin != null){
 			sum = coin.getValue() + sum;
     		}
@@ -77,7 +77,7 @@ public class Purse {
      * @param coin is a Coin object to insert into purse
      * @return true if coin inserted, false if can't insert
      */
-    public boolean insert( Coin coin ) {
+    public boolean insert( Valuable coin ) {
         if(!isFull() && coin != null && coin.getValue() > 0){
         	money.add(coin);
         	return true;
@@ -93,12 +93,12 @@ public class Purse {
      *  @return array of Coin objects for money withdrawn, 
 	 *    or null if cannot withdraw requested amount.
      */
-    public Coin[] withdraw( double amount ) {
+    public Valuable[] withdraw( double amount ) {
     	 if( amount < 0 ){
              return null;
          }
          Collections.sort(money);
-         ArrayList<Coin> templist = new ArrayList<Coin>();
+         ArrayList<Valuable> templist = new ArrayList<Valuable>();
          if(getBalance() >= amount){
              for(int i = money.size() -1 ; i >= 0 ; i--){
                  if(amount - money.get(i).getValue() >= 0){
@@ -115,7 +115,7 @@ public class Purse {
          for(int i = 0 ; i < templist.size() ; i++){
              money.remove(templist.get(i));
          }
-         Coin [] array = new Coin[ templist.size() ]; // create the array
+         Valuable [] array = new Valuable[ templist.size() ]; // create the array
          templist.toArray(array);
          return array;
 	}
