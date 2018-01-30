@@ -35,19 +35,24 @@ public class Banknote implements Valuable {
 		this.serialNumber = serialNumber;
 	}
 	
+	public Banknote(double value, String currency)
+	{
+		this.value = value;
+		this.currency = currency;
+	}
+	
 	/**
 	 * @return value of the banknote.
 	 */
 	public double getValue() {
-		return getValue() ;
-
+		return value;
 	}
 
 	/**
 	 * @return currency of the banknote
 	 */
 	public String getCurrency() {
-		return getCurrency();
+		return currency;
 	}
 	/**
 	 * @return serialNumber of the BankNote
