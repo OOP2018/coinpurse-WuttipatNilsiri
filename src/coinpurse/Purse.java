@@ -29,9 +29,9 @@ public class Purse {
     }
 
     /**
-     * Count and return the number of coins in the purse.
-     * This is the number of coins, not their value.
-     * @return the number of coins in the purse
+     * Count and return the number of items in the purse.
+     * This is the number of items, not their value.
+     * @return the number of items in the purse
      */
     public int count() { return money.size(); }
     
@@ -51,7 +51,7 @@ public class Purse {
 
     
     /**
-     * Return the capacity of the coin purse.
+     * Return the capacity of the purse.
      * @return the capacity
      */
     
@@ -71,11 +71,11 @@ public class Purse {
     }
 
     /** 
-     * Insert a coin into the purse.
-     * The coin is only inserted if the purse has space for it
-     * and the coin has positive value.  No worthless coins!
-     * @param coin is a Coin object to insert into purse
-     * @return true if coin inserted, false if can't insert
+     * Insert a item into the purse.
+     * The item is only inserted if the purse has space for it
+     * and the item has positive value.  No worthless coins!
+     * @param item is a Coin object to insert into purse
+     * @return true if item inserted, false if can't insert
      */
     public boolean insert( Valuable coin ) {
         if(!isFull() && coin != null && coin.getValue() > 0){
@@ -87,7 +87,7 @@ public class Purse {
     
     /**  
      *  Withdraw the requested amount of money.
-     *  Return an array of Coins withdrawn from purse,
+     *  Return an array of Valuables withdrawn from purse,
      *  or return null if cannot withdraw the amount requested.
      *  @param amount is the amount to withdraw
      *  @return array of Coin objects for money withdrawn, 

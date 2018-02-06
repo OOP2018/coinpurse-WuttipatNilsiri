@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class MoneyUtil {
 	/**
-	 * filter Coin by Currency in list
+	 * filter Valuable by Currency in list
 	 * @param coinlist : List<Coin>
 	 * @param currency : String
 	 * @return new list that unmodifiable
@@ -32,7 +32,7 @@ public class MoneyUtil {
 	}
 	
 	/**
-	 * sortCoin in the list
+	 * sort Valuable in the list
 	 * @param coins 
 	 */
 	public static void sortByValue(List<Valuable> coins) {

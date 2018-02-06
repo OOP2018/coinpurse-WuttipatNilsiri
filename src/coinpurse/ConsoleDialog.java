@@ -82,6 +82,7 @@ public class ConsoleDialog {
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
             double value = scanline.nextDouble();
+            
             Valuable money;
             if(value >= 20 ){
             	money = makeBankNote(value);
@@ -135,7 +136,10 @@ public class ConsoleDialog {
     }
     
     private Valuable makeBankNote(double value) {
-    	return new Banknote(value, CURRENCY);
+    	int range = (9999999 - 1000000) + 1;     
+    	double r = ((Math.random() * range) + 1000000);
+    	Long serialNum = (long) r;
+    	return new Banknote(value, CURRENCY,serialNum);
     }
     
 

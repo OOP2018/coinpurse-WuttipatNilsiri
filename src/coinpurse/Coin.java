@@ -64,7 +64,7 @@ public class Coin implements Valuable{
 		return false; 
 	}
 
-	@Override
+ 	@Override
 	public int compareTo(Valuable o){
         if(this.value < o.getValue()){
             return -1;
