@@ -80,6 +80,7 @@ public class Purse {
     public boolean insert( Valuable coin ) {
         if(!isFull() && coin != null && coin.getValue() > 0){
         	money.add(coin);
+        	Collections.sort(money);
         	return true;
         }else
         	return false;
@@ -98,6 +99,7 @@ public class Purse {
              return null;
          }
          Collections.sort(money);
+         
          ArrayList<Valuable> templist = new ArrayList<Valuable>();
          if(getBalance() >= amount){
              for(int i = money.size() -1 ; i >= 0 ; i--){
@@ -125,8 +127,9 @@ public class Purse {
      * It can return whatever is a useful description.
      */
     public String toString() {
-
+    	System.out.println(money);
     	return "purse with money : "+this.getBalance()+" size :"+this.getCapacity();
+    	
     }
 
 }

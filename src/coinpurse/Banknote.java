@@ -39,6 +39,9 @@ public class Banknote implements Valuable {
 	{
 		this.value = value;
 		this.currency = currency;
+		int range = (9999999 - 1000000) + 1;     
+    	double r = ((Math.random() * range) + 1000000);
+    	serialNumber = (long) r;
 	}
 	
 	/**

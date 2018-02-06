@@ -136,10 +136,7 @@ public class ConsoleDialog {
     }
     
     private Valuable makeBankNote(double value) {
-    	int range = (9999999 - 1000000) + 1;     
-    	double r = ((Math.random() * range) + 1000000);
-    	Long serialNum = (long) r;
-    	return new Banknote(value, CURRENCY,serialNum);
+    	return new Banknote(value, CURRENCY);
     }
     
 
