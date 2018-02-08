@@ -5,13 +5,12 @@ package coinpurse;
  *
  */
 
-public class Banknote implements Valuable {
+public class Banknote extends AbstractValuable {
 	
 	//variables
-	private String currency = "Baht";
-	private double value;
 	//A unique parameter for BankNote.
 	private long serialNumber = 1000000;
+	private long countgen = 0;
 	
 	/**
 	 * A banknote with given value and serialNumber.
@@ -19,7 +18,7 @@ public class Banknote implements Valuable {
 	 * @param serialNumber
 	 */
 	public Banknote(double value, long serialNumber){
-		this.value = value;
+		super(value);
 		this.serialNumber = serialNumber;
 	}
 	
@@ -30,33 +29,20 @@ public class Banknote implements Valuable {
 	 */
 	public Banknote(double value, String currency, long serialNumber)
 	{
-		this.value = value;
-		this.currency = currency;
+		super(value,currency);
 		this.serialNumber = serialNumber;
 	}
 	
 	public Banknote(double value, String currency)
 	{
-		this.value = value;
-		this.currency = currency;
-		int range = (9999999 - 1000000) + 1;     
-    	double r = ((Math.random() * range) + 1000000);
-    	serialNumber = (long) r;
+		super(value,currency);
+//		int range = (9999999 - 1000000) + 1;     
+//    	double r = ((Math.random() * range) + 1000000);
+    	serialNumber = countgen;
+    	countgen++;
 	}
 	
-	/**
-	 * @return value of the banknote.
-	 */
-	public double getValue() {
-		return value;
-	}
-
-	/**
-	 * @return currency of the banknote
-	 */
-	public String getCurrency() {
-		return currency;
-	}
+	
 	/**
 	 * @return serialNumber of the BankNote
 	 */
@@ -68,35 +54,17 @@ public class Banknote implements Valuable {
 	 * @return true if the object are equal.
 	 * @return false if the object are not equal.
 	 */
-	public boolean equals(Object obj){
-		if(obj.getClass() != this.getClass() || obj == null){
-			return false;
-		}
-		Banknote other = (Banknote) obj;
-		return this.getValue() == other.getValue() && this.getCurrency().equals(other.getCurrency());
-	}
 	
 	/**
 	 * Convert BankNote to string.
 	 * @return BankNote as a string.
 	 */
 	public String toString(){
-		return value+"--"+currency+" ["+serialNumber+"]";
+		return getValue()+"--"+getCurrency()+" ["+serialNumber+"]";
 
 	}
 
-	@Override
-	public int compareTo(Valuable other) {
-		if(this.value < other.getValue()){
-			return -1;
-		}
-		else if(this.value > other.getValue()){
-			return 1;
-		}
-		else{
-			return 0;
-		}
-	}
+	
 
 	
 
