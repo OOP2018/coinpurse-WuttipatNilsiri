@@ -3,6 +3,7 @@ package coinpurse;
 public abstract class Money implements Valuable{
 	private double value;
 	private String currency = "Baht";
+	private ValueComparator valueCom = new ValueComparator(); 
 	
 	public Money(double value,String currency) {
 		if (value > 0){			
@@ -46,15 +47,7 @@ public abstract class Money implements Valuable{
 	}
 	
 	public int compareTo(Valuable o){
-        if(this.value < o.getValue()){
-            return -1;
-        }
-        else if(this.value > o.getValue()){
-            return 1;
-        }
-        else{
-            return 0;
-        }
+        return valueCom.compare(this, o);
 	}
 	
 	public abstract String toString();

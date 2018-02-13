@@ -5,7 +5,7 @@ package coinpurse;
  *
  */
 
-public class Banknote extends Money {
+public class BankNote extends Money {
 	
 	//variables
 	//A unique parameter for BankNote.
@@ -17,7 +17,7 @@ public class Banknote extends Money {
 	 * @param value
 	 * @param serialNumber
 	 */
-	public Banknote(double value, long serialNumber){
+	public BankNote(double value, long serialNumber){
 		super(value);
 		this.serialNumber = serialNumber;
 	}
@@ -27,13 +27,13 @@ public class Banknote extends Money {
 	 * @param value - initial value of bank note
 	 * @param currency - currency of bank note
 	 */
-	public Banknote(double value, String currency, long serialNumber)
+	public BankNote(double value, String currency, long serialNumber)
 	{
 		super(value,currency);
 		this.serialNumber = serialNumber;
 	}
 	
-	public Banknote(double value, String currency)
+	public BankNote(double value, String currency)
 	{
 		super(value,currency);
 //		int range = (9999999 - 1000000) + 1;     
@@ -44,7 +44,7 @@ public class Banknote extends Money {
 	/**
 	 * @return serialNumber of the BankNote
 	 */
-	public long getSerialNumber(){
+	public long getSerial(){
 		return this.serialNumber;
 	}
 	/**
@@ -62,6 +62,7 @@ public class Banknote extends Money {
 
 	}
 
+	
 	
 
 	

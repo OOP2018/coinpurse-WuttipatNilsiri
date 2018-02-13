@@ -33,7 +33,7 @@ public class MoneyUtil {
 	
 	/**
 	 * sort Valuable in the list
-	 * @param coins 
+	 * @param coins inputed list 
 	 */
 	public static void sortByValue(List<Valuable> coins) {
 		coins.sort(new ValueComparator());

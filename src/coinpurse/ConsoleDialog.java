@@ -137,12 +137,12 @@ public class ConsoleDialog {
              Valuable [] money;
              Valuable amoutV;
              if (currency != null){
-            	 amoutV =  new Banknote(amount,currency);
+            	 amoutV =  new BankNote(amount,currency);
             	 money = purse.withdraw(amoutV);
              }
              else{
             	currency = CURRENCY;
-            	amoutV =  new Banknote(amount,CURRENCY);
+            	amoutV =  new BankNote(amount,CURRENCY);
         	 	money = purse.withdraw(amoutV);
              }
              
@@ -167,7 +167,7 @@ public class ConsoleDialog {
     
     private Valuable makeBankNote(double value) {
     	++count;
-    	return new Banknote(value, CURRENCY,count);
+    	return new BankNote(value, CURRENCY,count);
     }
     
     private Valuable makeCoin(double value,String currency) {
@@ -176,7 +176,7 @@ public class ConsoleDialog {
     
     private Valuable makeBankNote(double value,String currency) {
     	++count;
-    	return new Banknote(value, currency,count);
+    	return new BankNote(value, currency,count);
     }
     
 

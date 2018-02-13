@@ -80,12 +80,46 @@ public class Purse {
 	public boolean insert( Valuable coin ) {
 		if(!isFull() && coin != null && coin.getValue() > 0){
 			money.add(coin);
-			Collections.sort(money);
+			money.sort(new ValueComparator());
 			return true;
 		}else
 			return false;
 	}
 
+	/**  
+	 *  Withdraw the requested amount of money. from list
+	 *  Return an array of Valuables withdrawn from purse,
+	 *  or return null if cannot withdraw the amount requested.
+	 *  @param amount is the amount to withdraw
+	 *  @return array of Coin objects for money withdrawn, 
+	 *    or null if cannot withdraw requested amount.
+	 */
+	
+	public Valuable[] withdraw(double amount, List<Valuable> list){
+		if( amount < 0 ){
+			return null;
+		}
+		ArrayList<Valuable> templist = new ArrayList<Valuable>();
+		if(getBalance() >= amount){
+			for(int i = list.size() -1 ; i >= 0 ; i--){
+				if(amount - list.get(i).getValue() >= 0){
+					amount = amount - list.get(i).getValue();
+					templist.add(list.get(i));
+				}
+			}
+		}
+		// This code assumes you decrease amount each time you remove a coin.
+		if ( amount > 0 ) {
+			// failed. Don't change the contents of the purse.
+			return null;
+		}
+		for(int i = 0 ; i < templist.size() ; i++){
+			money.remove(templist.get(i));
+		}
+		Valuable [] array = new Valuable[ templist.size() ]; // create the array
+		templist.toArray(array);
+		return array;
+	}
 	/**  
 	 *  Withdraw the requested amount of money.
 	 *  Return an array of Valuables withdrawn from purse,
@@ -98,7 +132,7 @@ public class Purse {
 		if( amount < 0 ){
 			return null;
 		}
-		Collections.sort(money);
+		money.sort(new ValueComparator());
 
 		ArrayList<Valuable> templist = new ArrayList<Valuable>();
 		if(getBalance() >= amount){
@@ -121,37 +155,23 @@ public class Purse {
 		templist.toArray(array);
 		return array;
 	}
+	/**  
+	 *  Withdraw the requested amount of money. type Valuable
+	 *  Return an array of Valuables withdrawn from purse,
+	 *  or return null if cannot withdraw the amount requested.
+	 *  @param amount is the amount to withdraw
+	 *  @return array of Coin objects for money withdrawn, 
+	 *    or null if cannot withdraw requested amount.
+	 */
 
 	public Valuable[] withdraw(Valuable amountin ) {
 		double amount = amountin.getValue();
 		if( amount < 0 ){
 			return null;
 		}
-		Collections.sort(money);
+		money.sort(new ValueComparator());
 		List<Valuable> filteredmoney = MoneyUtil.filterByCurrency(money,amountin.getCurrency());
-		System.out.println("filter list");
-		System.out.println(filteredmoney.toString());
-		System.out.println("----------------------");
-		ArrayList<Valuable> templist = new ArrayList<Valuable>();
-		if(getBalance() >= amount){
-			for(int i = filteredmoney.size() -1 ; i >= 0 ; i--){
-				if(amount - filteredmoney.get(i).getValue() >= 0){
-					amount = amount - filteredmoney.get(i).getValue();
-					templist.add(filteredmoney.get(i));
-				}
-			}
-		}
-		// This code assumes you decrease amount each time you remove a coin.
-		if ( amount > 0 ) {
-			// failed. Don't change the contents of the purse.
-			return null;
-		}
-		for(int i = 0 ; i < templist.size() ; i++){
-			money.remove(templist.get(i));
-		}
-		Valuable [] array = new Valuable[ templist.size() ]; // create the array
-		templist.toArray(array);
-		return array;
+		return withdraw(amount,filteredmoney);
 	}
 
 	/** 
