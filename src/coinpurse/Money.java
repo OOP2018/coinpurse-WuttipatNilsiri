@@ -1,10 +1,10 @@
 package coinpurse;
 
-public abstract class AbstractValuable implements Valuable{
+public abstract class Money implements Valuable{
 	private double value;
 	private String currency = "Baht";
 	
-	public AbstractValuable(double value,String currency) {
+	public Money(double value,String currency) {
 		if (value > 0){			
 			this.value = value;
 			this.currency = currency;
@@ -13,7 +13,7 @@ public abstract class AbstractValuable implements Valuable{
 			System.out.println("value invalid");
 	}
 	
-	public AbstractValuable(double value){
+	public Money(double value){
 		if (value > 0){	
 			this.value = value;
 		}

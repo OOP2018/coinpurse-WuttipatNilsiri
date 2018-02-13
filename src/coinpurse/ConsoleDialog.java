@@ -35,7 +35,7 @@ public class ConsoleDialog {
         String choice = "";
         String prompt = FULL_PROMPT;
         loop: while( true ) {
-            System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), CURRENCY );
+            System.out.printf("Purse contains %s\n", purse.toString() );
             if ( purse.isFull() ) System.out.println("Purse is FULL.");
             // print a list of choices
             System.out.print(prompt);
@@ -70,6 +70,7 @@ public class ConsoleDialog {
      * The user can type the values on same line as he typed "d", e.g. "d 5 10 1"
      * so check for that.
      */
+    long count = 99999999;
     public void depositDialog() {
     	// Check to see if user typed values on the same line as "d".
     	// If so then use them without prompting for more.
@@ -82,13 +83,26 @@ public class ConsoleDialog {
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
             double value = scanline.nextDouble();
-            
+            String currency = null;
+            if (scanline.hasNextLine()){
+            	currency = scanline.nextLine().trim();
+            }
             Valuable money;
-            if(value >= 20 ){
-            	money = makeBankNote(value);
+            if (currency != null){
+            	if(value >= 20 ){
+                	money = makeBankNote(value,currency);
+                }
+                else{
+                	money = makeCoin(value,currency);
+                }
             }
             else{
-            	money = makeCoin(value);
+            	if(value >= 20 ){
+                	money = makeBankNote(value);
+                }
+                else{
+                	money = makeCoin(value);
+                }
             }
             System.out.printf("Deposit %s... ", money.toString() );
             boolean ok = purse.insert(money);
@@ -115,9 +129,25 @@ public class ConsoleDialog {
         
         if ( scanline.hasNextDouble() ) {
              double amount = scanline.nextDouble( );
-             Valuable [] money = purse.withdraw(amount);
+             
+             String currency = null;
+             if (scanline.hasNextLine()){
+             	currency = scanline.nextLine().trim();
+             }
+             Valuable [] money;
+             Valuable amoutV;
+             if (currency != null){
+            	 amoutV =  new Banknote(amount,currency);
+            	 money = purse.withdraw(amoutV);
+             }
+             else{
+            	currency = CURRENCY;
+            	amoutV =  new Banknote(amount,CURRENCY);
+        	 	money = purse.withdraw(amoutV);
+             }
+             
              if ( money == null ) 
-                System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, CURRENCY);
+                System.out.printf("Sorry, couldn't withdraw %.2f %s\n", amount, currency);
              else {
                 System.out.print("You withdrew:");
                 for(int k=0; k<money.length; k++) {
@@ -136,7 +166,17 @@ public class ConsoleDialog {
     }
     
     private Valuable makeBankNote(double value) {
-    	return new Banknote(value, CURRENCY);
+    	++count;
+    	return new Banknote(value, CURRENCY,count);
+    }
+    
+    private Valuable makeCoin(double value,String currency) {
+    	return new Coin(value, currency);
+    }
+    
+    private Valuable makeBankNote(double value,String currency) {
+    	++count;
+    	return new Banknote(value, currency,count);
     }
     
 

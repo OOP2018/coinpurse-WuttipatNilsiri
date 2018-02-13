@@ -4,7 +4,7 @@ package coinpurse;
  * @author wuttipat nilsiri
  *
  */
-public class Coin extends AbstractValuable{
+public class Coin extends Money{
 		
 	/**
 	 * Create new Coin

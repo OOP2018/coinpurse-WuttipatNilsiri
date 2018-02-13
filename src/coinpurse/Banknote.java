@@ -5,7 +5,7 @@ package coinpurse;
  *
  */
 
-public class Banknote extends AbstractValuable {
+public class Banknote extends Money {
 	
 	//variables
 	//A unique parameter for BankNote.
@@ -38,8 +38,6 @@ public class Banknote extends AbstractValuable {
 		super(value,currency);
 //		int range = (9999999 - 1000000) + 1;     
 //    	double r = ((Math.random() * range) + 1000000);
-    	serialNumber = countgen;
-    	countgen++;
 	}
 	
 	
