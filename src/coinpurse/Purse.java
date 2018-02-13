@@ -133,27 +133,7 @@ public class Purse {
 			return null;
 		}
 		money.sort(new ValueComparator());
-
-		ArrayList<Valuable> templist = new ArrayList<Valuable>();
-		if(getBalance() >= amount){
-			for(int i = money.size() -1 ; i >= 0 ; i--){
-				if(amount - money.get(i).getValue() >= 0){
-					amount = amount - money.get(i).getValue();
-					templist.add(money.get(i));
-				}
-			}
-		}
-		// This code assumes you decrease amount each time you remove a coin.
-		if ( amount > 0 ) {
-			// failed. Don't change the contents of the purse.
-			return null;
-		}
-		for(int i = 0 ; i < templist.size() ; i++){
-			money.remove(templist.get(i));
-		}
-		Valuable [] array = new Valuable[ templist.size() ]; // create the array
-		templist.toArray(array);
-		return array;
+		return withdraw(amount,money);
 	}
 	/**  
 	 *  Withdraw the requested amount of money. type Valuable
