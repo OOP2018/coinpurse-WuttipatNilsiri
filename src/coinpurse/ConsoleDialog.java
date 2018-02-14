@@ -2,6 +2,7 @@ package coinpurse;
  
 import java.util.Scanner;
 
+
 /** 
  * User Interface for the Coin Purse. 
  * This class provides simple interactive dialog for inserting
@@ -9,8 +10,11 @@ import java.util.Scanner;
  * balance.
  */
 public class ConsoleDialog {
+	
 	// default currency for this dialog
 	public static final String CURRENCY = "Baht";
+	static MoneyFactory moneyFactory  = null;
+	
     // use a single java.util.Scanner object for reading all input
     private static Scanner console = new Scanner( System.in );
     // Long prompt shown the first time
@@ -26,12 +30,20 @@ public class ConsoleDialog {
      * Initialize a new Purse dialog.
      * @param purse is the Purse to interact with.
      */
-    public ConsoleDialog(Purse purse ) {
+//    @SuppressWarnings("static-access")
+	public ConsoleDialog(Purse purse) {
     	this.purse = purse;
+    }
+    
+    private static void initFactory(MoneyFactory mf){
+    	MoneyFactory.setMoneyFactory(mf);
+    	moneyFactory = MoneyFactory.getInstance();
+    	
     }
     
     /** Run the user interface. */
     public void run() {
+    	initFactory(new MalayMoneyFactory());
         String choice = "";
         String prompt = FULL_PROMPT;
         loop: while( true ) {
@@ -97,12 +109,7 @@ public class ConsoleDialog {
                 }
             }
             else{
-            	if(value >= 20 ){
-                	money = makeBankNote(value);
-                }
-                else{
-                	money = makeCoin(value);
-                }
+            	money = moneyFactory.createMoney(value);
             }
             System.out.printf("Deposit %s... ", money.toString() );
             boolean ok = purse.insert(money);
@@ -141,8 +148,8 @@ public class ConsoleDialog {
             	 money = purse.withdraw(amoutV);
              }
              else{
-            	currency = CURRENCY;
-            	amoutV =  new BankNote(amount,CURRENCY);
+            	currency = moneyFactory.getCurrecy();
+            	amoutV = new BankNote(amount,currency);
         	 	money = purse.withdraw(amoutV);
              }
              
@@ -161,14 +168,14 @@ public class ConsoleDialog {
     }
     
     /** Make a Coin (or BankNote or whatever) using requested value. */
-    private Valuable makeCoin(double value) {
-    	return new Coin(value, CURRENCY);
-    }
-    
-    private Valuable makeBankNote(double value) {
-    	++count;
-    	return new BankNote(value, CURRENCY,count);
-    }
+//    private Valuable makeCoin(double value) {
+//    	return new Coin(value, CURRENCY);
+//    }
+//    
+//    private Valuable makeBankNote(double value) {
+//    	++count;
+//    	return new BankNote(value, CURRENCY,count);
+//    }
     
     private Valuable makeCoin(double value,String currency) {
     	return new Coin(value, currency);

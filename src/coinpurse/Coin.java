@@ -5,7 +5,8 @@ package coinpurse;
  *
  */
 public class Coin extends Money{
-		
+	final String malacurr = "Ringgit";
+	final String thaicurr = "Baht";
 	/**
 	 * Create new Coin
 	 * @param value
@@ -26,7 +27,10 @@ public class Coin extends Money{
 
 	@Override
 	public String toString(){
-		return getValue()+"-"+getCurrency()+" coin";
+		if (getCurrency().equals(thaicurr) && getValue() < 1) return getValue()*100+"-"+"Stang"+" coin";
+		if (getCurrency().equals(malacurr) && getValue() < 1) return getValue()*100+"-"+"Sen"+" coin";	
+		else return getValue()+"-"+getCurrency()+" coin";
+		
 	}
 	
 }
