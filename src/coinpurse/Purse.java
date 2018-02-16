@@ -95,11 +95,18 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 	
-	public Valuable[] withdraw(double amount, List<Valuable> list){
+	public Valuable[] withdraw(Valuable amountin){
+		double amount = amountin.getValue();
 		if( amount < 0 ){
 			return null;
 		}
+		if( amount < 0 ){
+			return null;
+		}
+		money.sort(new ValueComparator());
+//		Collections.reverse(money);
 		ArrayList<Valuable> templist = new ArrayList<Valuable>();
+		List<Valuable> list = MoneyUtil.filterByCurrency(money,amountin.getCurrency());
 		if(getBalance() >= amount){
 			for(int i = list.size() -1 ; i >= 0 ; i--){
 				if(amount - list.get(i).getValue() >= 0){
@@ -129,11 +136,8 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 	public Valuable[] withdraw( double amount ) {
-		if( amount < 0 ){
-			return null;
-		}
-		money.sort(new ValueComparator());
-		return withdraw(amount,money);
+		Valuable money = new BankNote(amount,"Baht");
+		return withdraw(money);
 	}
 	/**  
 	 *  Withdraw the requested amount of money. type Valuable
@@ -144,15 +148,15 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 
-	public Valuable[] withdraw(Valuable amountin ) {
-		double amount = amountin.getValue();
-		if( amount < 0 ){
-			return null;
-		}
-		money.sort(new ValueComparator());
-		List<Valuable> filteredmoney = MoneyUtil.filterByCurrency(money,amountin.getCurrency());
-		return withdraw(amount,filteredmoney);
-	}
+//	public Valuable[] withdraw(Valuable amountin ) {
+//		double amount = amountin.getValue();
+//		if( amount < 0 ){
+//			return null;
+//		}
+//		money.sort(new ValueComparator());
+//		List<Valuable> filteredmoney = MoneyUtil.filterByCurrency(money,amountin.getCurrency());
+//		return withdraw(amount,filteredmoney);
+//	}
 
 	/** 
 	 * toString returns a string description of the purse contents.
