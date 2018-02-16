@@ -10,7 +10,7 @@ public class BankNote extends Money {
 	//variables
 	//A unique parameter for BankNote.
 	private long serialNumber = 1000000;
-	private long countgen = 0;
+//	private long countgen = 0;
 	
 	/**
 	 * A banknote with given value and serialNumber.

@@ -87,7 +87,7 @@ public class Purse {
 	}
 
 	/**  
-	 *  Withdraw the requested amount of money. from list
+	 *  Withdraw the requested amount of money. from Valuable list 
 	 *  Return an array of Valuables withdrawn from purse,
 	 *  or return null if cannot withdraw the amount requested.
 	 *  @param amount is the amount to withdraw

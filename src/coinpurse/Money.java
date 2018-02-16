@@ -1,10 +1,18 @@
 package coinpurse;
-
+/**
+ * Abstract Class for kind of Money that is valuable
+ * @author Wuttipat nilsiri
+ *
+ */
 public abstract class Money implements Valuable{
 	private double value;
 	private String currency = "Baht";
 	private ValueComparator valueCom = new ValueComparator(); 
-	
+	/**
+	 * intial Money with value in double type and Currency type 
+	 * @param value of Money
+	 * @param currency of Money 
+	 */
 	public Money(double value,String currency) {
 		if (value > 0){			
 			this.value = value;
@@ -13,7 +21,10 @@ public abstract class Money implements Valuable{
 		else
 			System.out.println("value invalid");
 	}
-	
+	/**
+	 * intial Money with value in double type
+	 * @param value of Money
+	 */
 	public Money(double value){
 		if (value > 0){	
 			this.value = value;
