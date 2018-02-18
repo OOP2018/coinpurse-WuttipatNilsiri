@@ -168,5 +168,10 @@ public class Purse {
 
 	}
 
+	public List<Valuable> getMoney() {
+		// TODO Auto-generated method stub
+		return money;
+	}
+
 }
 

@@ -43,7 +43,7 @@ public class ConsoleDialog {
     
     /** Run the user interface. */
     public void run() {
-    	initFactory(new MalayMoneyFactory());
+    	initFactory(new ThaiMoneyFactory());
         String choice = "";
         String prompt = FULL_PROMPT;
         loop: while( true ) {

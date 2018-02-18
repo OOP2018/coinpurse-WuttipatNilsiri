@@ -11,8 +11,9 @@ public abstract class MoneyFactory {
 	 */
 	public static MoneyFactory getInstance(){
 		if (instance == null){
-			System.out.println("plz get money factory");
-			setMoneyFactory(defualFactory);
+			System.out.println("plz set money factory");
+//			setMoneyFactory(defualFactory);
+			throw new NullPointerException("Null");
 		}
 		return instance;
 	}
