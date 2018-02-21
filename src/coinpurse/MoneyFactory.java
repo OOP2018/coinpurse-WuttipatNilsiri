@@ -43,7 +43,14 @@ public abstract class MoneyFactory {
 	 * @return Valuable of the money
 	 */
 	public Valuable createMoney(String value){
-		double parsedvalue = Double.parseDouble(value);
+		double parsedvalue = 0;
+		try { 
+			parsedvalue = Double.parseDouble(value);
+			return createMoney(parsedvalue);
+		}
+		catch (NumberFormatException e){
+			System.out.println(e.getMessage());
+		}
 		return createMoney(parsedvalue);
 	}
 }
