@@ -7,6 +7,7 @@ package coinpurse;
 public class MalayMoneyFactory extends MoneyFactory {
 
 	final private String CURRENCY = "Ringgit";
+	final private String SUBCURRENCY = "Sen";
 	int countgen = 99999999;
 	/**
 	 * Create Money if value more than 20 it will create banknote 
@@ -25,6 +26,9 @@ public class MalayMoneyFactory extends MoneyFactory {
 	 */
 	public String getCurrecy(){
 		return CURRENCY;
+	}
+	public String getSubCurrecy(){
+		return SUBCURRENCY;
 	}
 	
 }

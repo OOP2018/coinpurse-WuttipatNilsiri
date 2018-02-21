@@ -32,5 +32,10 @@ public class Coin extends Money{
 		else return getValue()+"-"+getCurrency()+" coin";
 		
 	}
+	//not use now
+	public String toString(MoneyFactory mf){
+		if (getValue() < 1) return getValue()*100+"-"+mf.getSubCurrecy()+" coin";
+		else return getValue()+"-"+getCurrency()+" coin";
+	}
 	
 }

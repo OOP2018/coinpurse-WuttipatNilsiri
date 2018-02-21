@@ -36,6 +36,7 @@ public abstract class MoneyFactory {
 	 * @return Currency of Country
 	 */
 	public abstract String getCurrecy();
+	public abstract String getSubCurrecy();
 	/**
 	 * 
 	 * Create Money with condition to create banknote instead coin 

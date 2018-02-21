@@ -6,6 +6,7 @@ package coinpurse;
  */
 public class ThaiMoneyFactory extends MoneyFactory {
 	final private String CURRENCY = "Baht";
+	final private String SUBCURRENCY = "Stang";
 	int countgen = 99999999;
 	
 	public ThaiMoneyFactory(){}
@@ -26,6 +27,10 @@ public class ThaiMoneyFactory extends MoneyFactory {
 	 */
 	public String getCurrecy(){
 		return CURRENCY;
+	}
+	@Override
+	public String getSubCurrecy() {
+		return SUBCURRENCY ;
 	}
 
 }

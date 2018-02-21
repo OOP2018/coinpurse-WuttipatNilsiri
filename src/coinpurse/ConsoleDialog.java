@@ -3,6 +3,7 @@ package coinpurse;
 import java.util.Scanner;
 
 
+
 /** 
  * User Interface for the Coin Purse. 
  * This class provides simple interactive dialog for inserting
@@ -12,8 +13,10 @@ import java.util.Scanner;
 public class ConsoleDialog {
 	
 	// default currency for this dialog
-	public static final String CURRENCY = "Baht";
+	
+	
 	static MoneyFactory moneyFactory  = null;
+	public static String currency ;
 	
     // use a single java.util.Scanner object for reading all input
     private static Scanner console = new Scanner( System.in );
@@ -73,7 +76,7 @@ public class ConsoleDialog {
             	prompt = FULL_PROMPT;
             }
         }
-        System.out.println("Goodbye. The purse still has "+purse.getBalance()+" "+CURRENCY);
+        System.out.println("Goodbye. The purse still has "+purse.getBalance()+" "+moneyFactory.getCurrecy());
     }
 
     /** 
@@ -149,7 +152,7 @@ public class ConsoleDialog {
              }
              else{
             	currency = moneyFactory.getCurrecy();
-            	amoutV = new BankNote(amount,currency);
+            	amoutV = moneyFactory.createMoney(amount);
         	 	money = purse.withdraw(amoutV);
              }
              
@@ -181,7 +184,9 @@ public class ConsoleDialog {
     	return new Coin(value, currency);
     }
     
+    //use in creating money other than moneyfactory currency
     private Valuable makeBankNote(double value,String currency) {
+    	
     	++count;
     	return new BankNote(value, currency,count);
     }

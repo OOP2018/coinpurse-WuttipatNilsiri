@@ -46,6 +46,15 @@ public class MoneyFactoryTest {
         assertFalse( purse.insert(mf.createMoney(1000)) );
 
     }
+    
+    @Test
+    public void StringValue()
+    {
+    	testSetandgetInstance();
+    	Purse purse = new Purse(3);
+    	purse.insert(mf.createMoney("0.5"));
+    	purse.insert(mf.createMoney("sss"));
+    }
 
 
 
