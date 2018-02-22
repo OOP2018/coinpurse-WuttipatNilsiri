@@ -15,21 +15,16 @@ public class ThaiMoneyFactory extends MoneyFactory {
 	 */
 	@Override
 	public Valuable createMoney(double value) {
-		if (value < 0){
-			throw new IllegalArgumentException("invalid input" + value);
+		if(isBankNote(value)){
+			countgen++;
+			return new BankNote(value,CURRENCY,countgen);
 		}
-		else if (value >= 20){
-			if(!isBankNote(value)){
-				throw new IllegalArgumentException("invalid input" + value);
-			}else
-				countgen++;
-				return new BankNote(value,CURRENCY,countgen);
+		else if(isCoin(value)){
+			return new Coin(value,CURRENCY);
 		}
 		else 
-			if(!isCoin(value)){
-				throw new IllegalArgumentException("invalid input" + value);
-			}else
-				return new Coin(value,CURRENCY);
+			throw new IllegalArgumentException("invalid input" + value);
+	
 	}
 	/**
 	 * to know default currency Ringgit
