@@ -1,6 +1,6 @@
 package coinpurse;
 /**
- * Malay Money Factory will defaul currency Ringgit
+ * MalayMoney Factory will default currency Ringgit
  * @author Wuttipat nilsiri
  *
  */
@@ -14,15 +14,25 @@ public class MalayMoneyFactory extends MoneyFactory {
 	 */
 	@Override
 	public Valuable createMoney(double value) {
-		if (value >= 20){
-			countgen++;
-			return new BankNote(value,CURRENCY,countgen);
+		if (value < 0){
+			throw new IllegalArgumentException("invalid input" + value);
+		}
+		else if (value >= 20){
+			if(!isBankNote(value)){
+				throw new IllegalArgumentException("invalid input" + value);
+			}else
+				countgen++;
+				return new BankNote(value,CURRENCY,countgen);
 		}
 		else 
-			return new Coin(value,CURRENCY);
+			if(!isCoin(value)){
+				throw new IllegalArgumentException("invalid input" + value);
+			}else
+				return new Coin(value,CURRENCY);
+		
 	}
 	/**
-	 * to know defaul currency Ringgit
+	 * to know default currency Ringgit
 	 */
 	public String getCurrecy(){
 		return CURRENCY;
@@ -30,5 +40,12 @@ public class MalayMoneyFactory extends MoneyFactory {
 	public String getSubCurrecy(){
 		return SUBCURRENCY;
 	}
-	
+
+	boolean isBankNote(double value){
+		return value == 20 || value == 50 || value == 100 || value == 500 || value == 1000;
+	}
+
+	boolean isCoin(double value){
+		return value == 1 || value == 5 || value == 10 || value == 0.25 || value == 0.5;
+	}
 }

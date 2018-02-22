@@ -9,7 +9,7 @@ public abstract class Money implements Valuable{
 	private String currency = "Baht";
 	private ValueComparator valueCom = new ValueComparator(); 
 	/**
-	 * intial Money with value in double type and Currency type 
+	 * initial Money with value in double type and Currency type 
 	 * @param value of Money
 	 * @param currency of Money 
 	 */
@@ -22,7 +22,7 @@ public abstract class Money implements Valuable{
 			System.out.println("value invalid");
 	}
 	/**
-	 * intial Money with value in double type
+	 * initial Money with value in double type
 	 * @param value of Money
 	 */
 	public Money(double value){
