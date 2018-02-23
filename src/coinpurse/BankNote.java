@@ -12,7 +12,6 @@ public class BankNote extends Money {
 	
 	private long serialNumber = 1000000;
 //	private long countgen = 0;
-	
 	/**
 	 * A banknote with given value and serialNumber.
 	 * @param value
