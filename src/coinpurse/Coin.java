@@ -24,6 +24,7 @@ public class Coin extends Money{
 	public Coin(double value){
 		super(value);
 	}
+	
 
 	@Override
 	public String toString(){
@@ -36,6 +37,11 @@ public class Coin extends Money{
 	public String toString(MoneyFactory mf){
 		if (getValue() < 1) return getValue()*100+"-"+mf.getSubCurrecy()+" coin";
 		else return getValue()+"-"+getCurrency()+" coin";
+	}
+	
+	public static void main(String[] a){
+		Money c = new Coin(55,null);
+		System.out.println(c.toString());
 	}
 	
 }

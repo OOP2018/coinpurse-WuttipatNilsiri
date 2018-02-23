@@ -18,8 +18,6 @@ public abstract class Money implements Valuable{
 			this.value = value;
 			this.currency = currency;
 		}
-		else
-			System.out.println("value invalid");
 	}
 	/**
 	 * initial Money with value in double type
@@ -29,8 +27,6 @@ public abstract class Money implements Valuable{
 		if (value > 0){	
 			this.value = value;
 		}
-		else
-			System.out.println("value invalid");
 	}
 
 	/** to know value of Coin */
