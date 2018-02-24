@@ -49,7 +49,8 @@ public abstract class MoneyFactory {
 		}
 		catch (NumberFormatException e){
 			System.out.println(e.getMessage());
+			throw new IllegalArgumentException("invalid value");
 		}
-		return createMoney(parsedvalue);
+		
 	}
 }

@@ -15,7 +15,7 @@ public class ConsoleDialog {
 	// default currency for this dialog
 	
 	
-	static MoneyFactory moneyFactory  = null;
+	static MoneyFactory moneyFactory  = MoneyFactory.getInstance();
 	public static String currency ;
 	
     // use a single java.util.Scanner object for reading all input
@@ -46,7 +46,7 @@ public class ConsoleDialog {
     
     /** Run the user interface. */
     public void run() {
-    	initFactory(new ThaiMoneyFactory());
+//    	initFactory(new ThaiMoneyFactory());
         String choice = "";
         String prompt = FULL_PROMPT;
         loop: while( true ) {
