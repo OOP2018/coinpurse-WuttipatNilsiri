@@ -98,22 +98,22 @@ public class ConsoleDialog {
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
             double value = scanline.nextDouble();
-            String currency = null;
-            if (scanline.hasNextLine()){
-            	currency = scanline.nextLine().trim();
-            }
+//            String currency = null;
+//            if (scanline.hasNextLine()){
+//            	currency = scanline.nextLine().trim();
+//            }
             Valuable money;
-            if (currency != null){
-            	if(value >= 20 ){
-                	money = makeBankNote(value,currency);
-                }
-                else{
-                	money = makeCoin(value,currency);
-                }
-            }
-            else{
+//            if (currency != null){
+//            	if(value >= 20 ){
+//                	money = makeBankNote(value,currency);
+//                }
+//                else{
+//                	money = makeCoin(value,currency);
+//                }
+//            }
+//            else{
             	money = moneyFactory.createMoney(value);
-            }
+//            }
             System.out.printf("Deposit %s... ", money.toString() );
             boolean ok = purse.insert(money);
             System.out.println( (ok? "ok" : "FAILED") );
@@ -147,12 +147,12 @@ public class ConsoleDialog {
              Valuable [] money;
              Valuable amoutV;
              if (currency != null){
-            	 amoutV =  new BankNote(amount,currency);
+            	 amoutV =  new Money(amount,currency);
             	 money = purse.withdraw(amoutV);
              }
              else{
             	currency = moneyFactory.getCurrecy();
-            	amoutV = moneyFactory.createMoney(amount);
+            	amoutV = new Money(amount,currency);
         	 	money = purse.withdraw(amoutV);
              }
              

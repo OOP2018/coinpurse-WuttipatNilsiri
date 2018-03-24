@@ -3,6 +3,9 @@ package coinpurse;
 
 import java.util.*;
 
+import strategy.GreedyWithdraw;
+import strategy.WithdrawStrategy;
+
 /**
  *  A coin purse contains coins.
  *  You can insert coins, withdraw money, check the balance,
@@ -18,14 +21,21 @@ public class Purse {
 	 *  Capacity is set when the purse is created and cannot be changed.
 	 */
 	private final int capacity;
+	
+	private WithdrawStrategy str = new GreedyWithdraw();
+	private Comparator<Valuable> comp = new ValueComparator();
 
 	/** 
 	 *  Create a purse with a specified capacity.
 	 *  @param capacity is maximum number of coins you can put in purse.
 	 */
-	public Purse( int capacity ) {
+	public Purse( int capacity) {
 		this.capacity = capacity;
 		money = new ArrayList<Valuable>(this.capacity);
+	}
+	
+	public void setStr(WithdrawStrategy str) {
+		this.str = str;
 	}
 
 	/**
@@ -94,39 +104,36 @@ public class Purse {
 	 *  @return array of Coin objects for money withdrawn, 
 	 *    or null if cannot withdraw requested amount.
 	 */
-	
-	public Valuable[] withdraw(Valuable amountin){
-		double amount = amountin.getValue();
-		if( amount < 0 ){
-			return null;
-		}
-		if( amount < 0 ){
-			return null;
-		}
-		money.sort(new ValueComparator());
-//		Collections.reverse(money);
-		ArrayList<Valuable> templist = new ArrayList<Valuable>();
-		List<Valuable> list = MoneyUtil.filterByCurrency(money,amountin.getCurrency());
-		if(getBalance() >= amount){
-			for(int i = list.size() -1 ; i >= 0 ; i--){
-				if(amount - list.get(i).getValue() >= 0){
-					amount = amount - list.get(i).getValue();
-					templist.add(list.get(i));
-				}
+
+	 public Valuable[] withdraw( Valuable amount ) {
+		   	if(amount == null || amount.getValue() <= 0 ) return null;	
+//		    	 double cash = amount.getValue();
+		    	 Collections.sort(money, comp);
+		    	 
+		    	 List<Valuable> m =  MoneyUtil.filterByCurrency(money,amount.getCurrency());
+		    	 List<Valuable> temp = new ArrayList<Valuable>();
+		    	
+		//   
+		    	 if(getBalance() >= amount.getValue()){
+//		    		 for (Valuable value : m){
+//		    			 if (cash - value.getValue() >= 0){
+//		    				 cash -= value.getValue();
+//		    				 temp.add(value);
+//		    			 } 
+		    		 temp = str.withdraw(amount, m);
+		   		 }
+		     		
+//		    	 }
+		    	 if (temp == null ) return null;
+		    	 
+		    	 for (Valuable value : temp){
+		    		 money.remove(value);
+		    	 }
+		   	 
+		    	 Valuable[] array = new Valuable[temp.size()];// create the array
+		         temp.toArray(array);
+		         return array;  
 			}
-		}
-		// This code assumes you decrease amount each time you remove a coin.
-		if ( amount > 0 ) {
-			// failed. Don't change the contents of the purse.
-			return null;
-		}
-		for(int i = 0 ; i < templist.size() ; i++){
-			money.remove(templist.get(i));
-		}
-		Valuable [] array = new Valuable[ templist.size() ]; // create the array
-		templist.toArray(array);
-		return array;
-	}
 	/**  
 	 *  Withdraw the requested amount of money.
 	 *  Return an array of Valuables withdrawn from purse,
@@ -148,15 +155,15 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 
-//	public Valuable[] withdraw(Valuable amountin ) {
-//		double amount = amountin.getValue();
-//		if( amount < 0 ){
-//			return null;
-//		}
-//		money.sort(new ValueComparator());
-//		List<Valuable> filteredmoney = MoneyUtil.filterByCurrency(money,amountin.getCurrency());
-//		return withdraw(amount,filteredmoney);
-//	}
+	//	public Valuable[] withdraw(Valuable amountin ) {
+	//		double amount = amountin.getValue();
+	//		if( amount < 0 ){
+	//			return null;
+	//		}
+	//		money.sort(new ValueComparator());
+	//		List<Valuable> filteredmoney = MoneyUtil.filterByCurrency(money,amountin.getCurrency());
+	//		return withdraw(amount,filteredmoney);
+	//	}
 
 	/** 
 	 * toString returns a string description of the purse contents.

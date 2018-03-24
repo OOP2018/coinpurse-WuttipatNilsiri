@@ -4,7 +4,7 @@ package coinpurse;
  * @author Wuttipat nilsiri
  *
  */
-public abstract class Money implements Valuable{
+public  class Money implements Valuable{
 	private double value;
 	private String currency = "Baht";
 	private ValueComparator valueCom = new ValueComparator(); 
@@ -57,7 +57,9 @@ public abstract class Money implements Valuable{
         return valueCom.compare(this, o);
 	}
 	
-	public abstract String toString();
+	public String toString() {
+		return "";
+	}
 	
 
 }
